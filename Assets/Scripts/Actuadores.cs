@@ -71,10 +71,10 @@ public class Actuadores : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
     }
 
-    public void Limpiar(GameObject basura){
-        basura.SetActive(false);
-        //sensor.SetTocandoBasura(false);
-        //sensor.SetCercaDeBasura(false);
+    public void Limpiar(GameObject libro){
+        libro.SetActive(false);
+        sensor.SetTocandoLibro(false);
+        sensor.SetCercaDeLibro(false);
     }
 
     public void CargarBateria(){
@@ -93,6 +93,7 @@ public class Actuadores : MonoBehaviour
     }
 
     public void avanzar(float x , float z){
+        Debug.Log("llegue aqui adentro");
         sensor.ActualizarPosicion();
         Vector3 objetivo = new Vector3(x, sensor.posicion[1], z);
         transform.position = Vector3.MoveTowards(sensor.posicion, objetivo, 30.0f * Time.deltaTime); 

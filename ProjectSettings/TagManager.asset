@@ -8,6 +8,7 @@ TagManager:
   - Basura
   - Dron
   - BaseDeCarga
+  - Libro
   layers:
   - Default
   - TransparentFX

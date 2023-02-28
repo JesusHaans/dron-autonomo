@@ -62,7 +62,8 @@ public class ComportamientoAutomatico : MonoBehaviour {
         float dist0 = Vector3.Distance(mesas[0], sensor.posicion) - sensor.posicion[1] + mesas[0][1];
         //print("Distance to other: " + dist);
         if(dist0 != 0 && contador == 0){
-        	actuador.avanzar(mesas[0][0], mesas[0][2]);
+			Debug.Log("llegue aqui");
+			actuador.avanzar(mesas[0][0], mesas[0][2]);
         	actuador.Detener();
         }else{
         	if(dist0 == 0 && contador == 0) contador++;
@@ -92,32 +93,6 @@ public class ComportamientoAutomatico : MonoBehaviour {
         	if(dist0 == 0 && contador == 3) contador++;
         }
 
-
-
-        // A continuación se muestran ejemplos de uso de actuadores y sensores
-        // para ser utilizados de manera manual (por una persona):
-
-        if(Input.GetKey(KeyCode.I))
-            actuador.Ascender();
-        if(Input.GetKey(KeyCode.K))
-            actuador.Descender();
-        /*if(!Input.GetKey(KeyCode.I) && !Input.GetKey(KeyCode.K))
-            actuador.Flotar();*/
-
-        if(Input.GetAxis("Vertical") > 0)
-            actuador.Adelante();
-        if(Input.GetAxis("Vertical") < 0)
-            actuador.Atras();
-
-        if(Input.GetKey(KeyCode.J))
-            actuador.GirarIzquierda();
-        if(Input.GetKey(KeyCode.L))
-            actuador.GirarDerecha();
-
-        if(Input.GetAxis("Horizontal") > 0)
-            actuador.Derecha();
-        if(Input.GetAxis("Horizontal") < 0)
-            actuador.Izquierda();
 
 
 	}
