@@ -93,7 +93,7 @@ public class Actuadores : MonoBehaviour
     }
 
     public void avanzar(float x , float z){
-        Debug.Log("llegue aqui adentro");
+        //Debug.Log("llegue aqui adentro");
         sensor.ActualizarPosicion();
         Vector3 objetivo = new Vector3(x, sensor.posicion[1], z);
         transform.position = Vector3.MoveTowards(sensor.posicion, objetivo, 30.0f * Time.deltaTime); 

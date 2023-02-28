@@ -12,12 +12,14 @@ public class ComportamientoAutomatico : MonoBehaviour {
 	bool dir = true; 
 	private float movementSpeed = 5f;
 	public Vector3[] mesas = new Vector3[4];
+	public Vector3 zonaDeDesinfeccion;
 	int contador;
 
 	void Start(){
 		sensor = GetComponent<Sensores>();
 		actuador = GetComponent<Actuadores>();
 		baseDeCarga = GameObject.Find("BaseDeCarga").transform.position;
+		zonaDeDesinfeccion = GameObject.Find("zona desinfección").transform.position;
 		mesas[0] = GameObject.Find("mesa").transform.position;
 		mesas[1] = GameObject.Find("mesa (1)").transform.position;
 		mesas[2] = GameObject.Find("mesa (2)").transform.position;
@@ -62,11 +64,14 @@ public class ComportamientoAutomatico : MonoBehaviour {
         float dist0 = Vector3.Distance(mesas[0], sensor.posicion) - sensor.posicion[1] + mesas[0][1];
         //print("Distance to other: " + dist);
         if(dist0 != 0 && contador == 0){
-			Debug.Log("llegue aqui");
+			//Debug.Log("llegue aqui");
 			actuador.avanzar(mesas[0][0], mesas[0][2]);
         	actuador.Detener();
         }else{
-        	if(dist0 == 0 && contador == 0) contador++;
+        	if(dist0 == 0 && contador == 0) {
+        		contador++;
+        		if(sensor.CercaDeLibro()) Debug.Log("Encontre 1 libro");
+        	}
         }
         float dist1 = Vector3.Distance(mesas[1], sensor.posicion) - sensor.posicion[1] + mesas[1][1];
         //print("Distance to other: " + dist);
@@ -74,7 +79,10 @@ public class ComportamientoAutomatico : MonoBehaviour {
         	actuador.avanzar(mesas[1][0], mesas[1][2]);
         	actuador.Detener();
         }else{
-        	if(dist1 == 0 && contador == 1) contador++;
+        	if(dist1 == 0 && contador == 1){
+        	 contador++;
+        	 if(sensor.CercaDeLibro()) Debug.Log("Encontre 2 libro");
+        	}
         }
         float dist2 = Vector3.Distance(mesas[2], sensor.posicion) - sensor.posicion[1] + mesas[2][1];
         //print("Distance to other: " + dist);
@@ -82,15 +90,21 @@ public class ComportamientoAutomatico : MonoBehaviour {
         	actuador.avanzar(mesas[2][0], mesas[2][2]);
         	actuador.Detener();
         }else{
-        	if(dist2 == 0 && contador == 2) contador++;
+        	if(dist2 == 0 && contador == 2){
+        	 contador++;
+        	 if(sensor.CercaDeLibro()) Debug.Log("Encontre 3 libro");
+        	}
         }
         float dist3 = Vector3.Distance(mesas[3], sensor.posicion) - sensor.posicion[1] + mesas[3][1];
         //print("Distance to other: " + dist);
-        if(dist0 != 0 && contador == 3){
+        if(dist3 != 0 && contador == 3){
         	actuador.avanzar(mesas[3][0], mesas[3][2]);
         	actuador.Detener();
         }else{
-        	if(dist0 == 0 && contador == 3) contador++;
+        	if(dist3 == 0 && contador == 3){
+        	 contador++;
+        	 if(sensor.CercaDeLibro()) Debug.Log("Encontre 4 libro");
+        	}
         }
 
 
