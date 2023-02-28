@@ -9,10 +9,12 @@ public class Radar : MonoBehaviour{
 
     private bool cercaDeLibro;
     private bool cercaDePared;
+    private GameObject libro; // Auxiliar para guardar referencia al objeto
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Libro")){
             cercaDeLibro = true;
+            libro = other.gameObject;
         }
         if(other.gameObject.CompareTag("Pared")){
             cercaDePared = true;
@@ -22,6 +24,7 @@ public class Radar : MonoBehaviour{
     void OnTriggerStay(Collider other){
         if(other.gameObject.CompareTag("Libro")){
             cercaDeLibro = true;
+            libro = other.gameObject;
         }
         if(other.gameObject.CompareTag("Pared")){
             cercaDePared = true;
@@ -31,6 +34,7 @@ public class Radar : MonoBehaviour{
     void OnTriggerExit(Collider other){
         if(other.gameObject.CompareTag("Libro")){
             cercaDeLibro = false;
+            libro = null;
         }
         if(other.gameObject.CompareTag("Pared")){
             cercaDePared = false;
@@ -43,6 +47,10 @@ public class Radar : MonoBehaviour{
 
     public bool CercaDePared(){
         return cercaDePared;
+    }
+
+    public GameObject LibroEnRadar(){
+        return libro;
     }
 
     public void setCercaDeLibro(bool value){

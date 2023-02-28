@@ -70,7 +70,10 @@ public class ComportamientoAutomatico : MonoBehaviour {
         }else{
         	if(dist0 == 0 && contador == 0) {
         		contador++;
-        		if(sensor.CercaDeLibro()) Debug.Log("Encontre 1 libro");
+        		if(sensor.CercaDeLibro()){
+        		 Debug.Log("Encontre " + sensor.GetLibro().name);
+        		 actuador.RecogerLibro(sensor.GetLibro());
+        		}
         	}
         }
         float dist1 = Vector3.Distance(mesas[1], sensor.posicion) - sensor.posicion[1] + mesas[1][1];
@@ -81,7 +84,10 @@ public class ComportamientoAutomatico : MonoBehaviour {
         }else{
         	if(dist1 == 0 && contador == 1){
         	 contador++;
-        	 if(sensor.CercaDeLibro()) Debug.Log("Encontre 2 libro");
+        	 if(sensor.CercaDeLibro()){
+        	  Debug.Log("Encontre  " + sensor.GetLibro().name);
+        	  actuador.RecogerLibro(sensor.GetLibro());
+        	 }
         	}
         }
         float dist2 = Vector3.Distance(mesas[2], sensor.posicion) - sensor.posicion[1] + mesas[2][1];
@@ -92,7 +98,10 @@ public class ComportamientoAutomatico : MonoBehaviour {
         }else{
         	if(dist2 == 0 && contador == 2){
         	 contador++;
-        	 if(sensor.CercaDeLibro()) Debug.Log("Encontre 3 libro");
+        	 if(sensor.CercaDeLibro()){
+        	  Debug.Log("Encontre  " + sensor.GetLibro().name);
+        	  actuador.RecogerLibro(sensor.GetLibro());
+        	 }
         	}
         }
         float dist3 = Vector3.Distance(mesas[3], sensor.posicion) - sensor.posicion[1] + mesas[3][1];
@@ -103,8 +112,12 @@ public class ComportamientoAutomatico : MonoBehaviour {
         }else{
         	if(dist3 == 0 && contador == 3){
         	 contador++;
-        	 if(sensor.CercaDeLibro()) Debug.Log("Encontre 4 libro");
+        	 if(sensor.CercaDeLibro()){
+        	  Debug.Log("Encontre " + sensor.GetLibro().name);
+        	  actuador.RecogerLibro(sensor.GetLibro());
+        	 }
         	}
+        	actuador.Flotar();
         }
 
 

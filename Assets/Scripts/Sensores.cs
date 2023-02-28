@@ -140,7 +140,7 @@ public class Sensores : MonoBehaviour{
     // Algunos otros métodos auxiliares que pueden ser de apoyo
 
     public GameObject GetLibro(){
-        return libro;
+        return radar.LibroEnRadar();
     }
 
     public Vector3 Ubicacion(){

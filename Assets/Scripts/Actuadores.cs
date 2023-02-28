@@ -100,4 +100,9 @@ public class Actuadores : MonoBehaviour
         sensor.ActualizarPosicion();
     }
 
+    public void RecogerLibro(GameObject libro){
+        //transform.position = Vector3.MoveTowards(sensor.posicion, libro.transform.position, 30.0f * Time.deltaTime); 
+        libro.SetActive(false);
+    }
+
 }
