@@ -8,13 +8,13 @@ public class Sensores : MonoBehaviour{
     private Radar radar; // Componente auxiliar (script) para utilizar radar esférico
     //private Rayo rayo; // Componente auxiliar (script) para utilizar rayo lineal pero no se ocupara
     private Bateria bateria; // Componente adicional (script) que representa la batería
+    private Carga carga;
     private Actuadores actuador; // Componente adicional (script) para obtener información de los ac
     private GameObject libro; // Auxiliar para guardar referencia al objeto
     public GameObject estacionDeCarga;
     public double x;
     public double z;
     public Vector3 posicion;
-    public int carga;
 
     private bool tocandoPared; // Bandera auxiliar para mantener el estado en caso de tocar pared
     private bool cercaPared; // Bandera auxiliar para mantener el estado en caso de estar cerca de una pared
@@ -27,12 +27,12 @@ public class Sensores : MonoBehaviour{
         radar = GameObject.Find("Radar").gameObject.GetComponent<Radar>();
         //rayo = GameObject.Find("Rayo").gameObject.GetComponent<Rayo>();
         bateria = GameObject.Find("Bateria").gameObject.GetComponent<Bateria>();
+        carga = GameObject.Find("Carga").gameObject.GetComponent<Carga>();
         actuador = GetComponent<Actuadores>();
         x = Math.Floor(Input.GetAxis("Horizontal"));
         z = Math.Floor(Input.GetAxis("Vertical"));
 
         posicion = GameObject.Find("Dron").transform.position;
-        carga = 0;
 
     }
 
@@ -153,5 +153,9 @@ public class Sensores : MonoBehaviour{
 
     public void SetCercaDeLibro(bool value){
         radar.setCercaDeLibro(value);
+    }
+
+    public int CargaDeLibros(){
+        return carga.NivelDeCarga();
     }
 }

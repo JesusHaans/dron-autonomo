@@ -6,6 +6,7 @@ public class Actuadores : MonoBehaviour
 {
     private Rigidbody rb; // Componente para simular acciones físicas realistas
     private Bateria bateria; // Componente adicional (script) que representa la batería
+    private Carga carga;
     private Sensores sensor; // Componente adicional (script) para obtener información de los sensores
 
     private float upForce; // Indica la fuerza de elevación del dron
@@ -21,6 +22,7 @@ public class Actuadores : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         sensor = GetComponent<Sensores>();
         bateria = GameObject.Find("Bateria").gameObject.GetComponent<Bateria>();
+        carga = GameObject.Find("Carga").gameObject.GetComponent<Carga>();
     }
 
     // ========================================
@@ -102,7 +104,15 @@ public class Actuadores : MonoBehaviour
 
     public void RecogerLibro(GameObject libro){
         //transform.position = Vector3.MoveTowards(sensor.posicion, libro.transform.position, 30.0f * Time.deltaTime); 
-        libro.SetActive(false);
+        if(libro.activeSelf){
+            libro.SetActive(false);
+            carga.Cargar();
+        }
+
+    }
+
+    public void DescargarLibros(){
+        carga.Descargar();
     }
 
 }

@@ -7,6 +7,7 @@ public class ComportamientoAutomatico : MonoBehaviour {
 	private Sensores sensor;
 	private Actuadores actuador;
 	public Vector3 baseDeCarga;
+	private bool cicloTerminado;
 	int grados = 0;
 	bool girando = false;
 	bool dir = true; 
@@ -25,104 +26,89 @@ public class ComportamientoAutomatico : MonoBehaviour {
 		mesas[2] = GameObject.Find("mesa (2)").transform.position;
 		mesas[3] = GameObject.Find("mesa (3)").transform.position;
 		contador = 0;
+		cicloTerminado = false;
 		//uBase = GameObject.Find("Base").transform;
 		//baseCarga = this.transform;
 	}
 
 	void FixedUpdate () {
-		/*
-		if(sensor.Bateria() <= 0) {
-			return;
+
+		if(sensor.CargaDeLibros() < 3 && contador < 4){
+
+	        float dist0 = Vector3.Distance(mesas[0], sensor.posicion) - sensor.posicion[1] + mesas[0][1];
+	        //print("Distance to other: " + dist);
+	        if(dist0 != 0 && contador == 0){
+				//Debug.Log("llegue aqui");
+				actuador.avanzar(mesas[0][0], mesas[0][2]);
+	        	actuador.Detener();
+	        }else{
+	        	if(dist0 == 0 && contador == 0) {
+	        		contador++;
+	        		if(sensor.CercaDeLibro()){
+	        		 Debug.Log("Encontre " + sensor.GetLibro().name);
+	        		 actuador.RecogerLibro(sensor.GetLibro());
+	        		}
+	        	}
+	        }
+	        float dist1 = Vector3.Distance(mesas[1], sensor.posicion) - sensor.posicion[1] + mesas[1][1];
+	        //print("Distance to other: " + dist);
+	        if(dist1 != 0 && contador == 1){
+	        	actuador.avanzar(mesas[1][0], mesas[1][2]);
+	        	actuador.Detener();
+	        }else{
+	        	if(dist1 == 0 && contador == 1){
+	        	 contador++;
+	        	 if(sensor.CercaDeLibro()){
+	        	  Debug.Log("Encontre  " + sensor.GetLibro().name);
+	        	  actuador.RecogerLibro(sensor.GetLibro());
+	        	 }
+	        	}
+	        }
+	        float dist2 = Vector3.Distance(mesas[2], sensor.posicion) - sensor.posicion[1] + mesas[2][1];
+	        //print("Distance to other: " + dist);
+	        if(dist2 != 0 && contador == 2){
+	        	actuador.avanzar(mesas[2][0], mesas[2][2]);
+	        	actuador.Detener();
+	        }else{
+	        	if(dist2 == 0 && contador == 2){
+	        	 contador++;
+	        	 if(sensor.CercaDeLibro()){
+	        	  Debug.Log("Encontre  " + sensor.GetLibro().name);
+	        	  actuador.RecogerLibro(sensor.GetLibro());
+	        	 }
+	        	}
+	        }
+	        float dist3 = Vector3.Distance(mesas[3], sensor.posicion) - sensor.posicion[1] + mesas[3][1];
+	        //print("Distance to other: " + dist);
+	        if(dist3 != 0 && contador == 3){
+	        	actuador.avanzar(mesas[3][0], mesas[3][2]);
+	        	actuador.Detener();
+	        }else{
+	        	if(dist3 == 0 && contador == 3){
+	        	 contador++;
+	        	 if(sensor.CercaDeLibro()){
+	        	  Debug.Log("Encontre " + sensor.GetLibro().name);
+	        	  actuador.RecogerLibro(sensor.GetLibro());
+	        	 }
+	        	}
+	        	actuador.Flotar();
+	        	
+	        }
+
+		}else{
+			float distanciaZona = Vector3.Distance(zonaDeDesinfeccion, sensor.posicion) - sensor.posicion[1] + zonaDeDesinfeccion[1];
+			if(distanciaZona != 0){
+				actuador.avanzar(zonaDeDesinfeccion[0],zonaDeDesinfeccion[2]);
+				actuador.Detener();
+			}else{
+				actuador.Flotar();
+				actuador.DescargarLibros();
+				if(contador == 4) contador = 0;
+				actuador.Flotar();
+			}
+			
 		}
-
-		if(girando){
-			Rotar();
-		}
-
-		if (sensor.FrenteAPared()) {
-			girando = true;
-			actuador.Flotar();
-			actuador.Detener();
-			Rotar();
-		} else {
-			actuador.Flotar();
-			actuador.Adelante();
-		}*/
-
-		//actuador.Flotar();
-		//actuador.avanzarCasilla();
-
-        //update the position
-        //transform.position = transform.position + new Vector3(horizontalInput * movementSpeed * Time.deltaTime, verticalInput * movementSpeed * Time.deltaTime, 0);
-
-        //output to log the position change
-        //Debug.Log(transform.position);
-        //Debug.Log("Quedamos en la casilla (" + sensor.posicionx() + "," +sensor.posicionz() + ")");
-        float a = 120;
-        float b = 120;
-        
-        float dist0 = Vector3.Distance(mesas[0], sensor.posicion) - sensor.posicion[1] + mesas[0][1];
-        //print("Distance to other: " + dist);
-        if(dist0 != 0 && contador == 0){
-			//Debug.Log("llegue aqui");
-			actuador.avanzar(mesas[0][0], mesas[0][2]);
-        	actuador.Detener();
-        }else{
-        	if(dist0 == 0 && contador == 0) {
-        		contador++;
-        		if(sensor.CercaDeLibro()){
-        		 Debug.Log("Encontre " + sensor.GetLibro().name);
-        		 actuador.RecogerLibro(sensor.GetLibro());
-        		}
-        	}
-        }
-        float dist1 = Vector3.Distance(mesas[1], sensor.posicion) - sensor.posicion[1] + mesas[1][1];
-        //print("Distance to other: " + dist);
-        if(dist1 != 0 && contador == 1){
-        	actuador.avanzar(mesas[1][0], mesas[1][2]);
-        	actuador.Detener();
-        }else{
-        	if(dist1 == 0 && contador == 1){
-        	 contador++;
-        	 if(sensor.CercaDeLibro()){
-        	  Debug.Log("Encontre  " + sensor.GetLibro().name);
-        	  actuador.RecogerLibro(sensor.GetLibro());
-        	 }
-        	}
-        }
-        float dist2 = Vector3.Distance(mesas[2], sensor.posicion) - sensor.posicion[1] + mesas[2][1];
-        //print("Distance to other: " + dist);
-        if(dist2 != 0 && contador == 2){
-        	actuador.avanzar(mesas[2][0], mesas[2][2]);
-        	actuador.Detener();
-        }else{
-        	if(dist2 == 0 && contador == 2){
-        	 contador++;
-        	 if(sensor.CercaDeLibro()){
-        	  Debug.Log("Encontre  " + sensor.GetLibro().name);
-        	  actuador.RecogerLibro(sensor.GetLibro());
-        	 }
-        	}
-        }
-        float dist3 = Vector3.Distance(mesas[3], sensor.posicion) - sensor.posicion[1] + mesas[3][1];
-        //print("Distance to other: " + dist);
-        if(dist3 != 0 && contador == 3){
-        	actuador.avanzar(mesas[3][0], mesas[3][2]);
-        	actuador.Detener();
-        }else{
-        	if(dist3 == 0 && contador == 3){
-        	 contador++;
-        	 if(sensor.CercaDeLibro()){
-        	  Debug.Log("Encontre " + sensor.GetLibro().name);
-        	  actuador.RecogerLibro(sensor.GetLibro());
-        	 }
-        	}
-        	actuador.Flotar();
-        }
-
-
-
-	}
+    }
 
 	void Rotar(){
 		grados++;
