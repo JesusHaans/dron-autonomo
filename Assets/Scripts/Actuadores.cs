@@ -9,12 +9,12 @@ public class Actuadores : MonoBehaviour
     private Sensores sensor; // Componente adicional (script) para obtener información de los sensores
 
     private float upForce; // Indica la fuerza de elevación del dron
-    private float movementForwardSpeed = 100.0f; // Escalar para indicar fuerza de movimiento frontal
+    private float movementForwardSpeed = 10.0f; // Escalar para indicar fuerza de movimiento frontal
     private float wantedYRotation; // Auxiliar para el cálculo de rotación
     private float currentYRotation; // Auxiliar para el cálculo de rotación
     private float rotateAmountByKeys = 2.5f; // Auxiliar para el cálculo de rotación
     private float rotationYVelocity; // Escalar (calculado) para indicar velocidad de rotación
-    private float sideMovementAmount = 250.0f; // Escalar para indicar velocidad de movimiento lateral
+    private float sideMovementAmount = 25.0f; // Escalar para indicar velocidad de movimiento lateral
 
     // Asignaciones de componentes
     void Start(){
@@ -73,11 +73,30 @@ public class Actuadores : MonoBehaviour
 
     public void Limpiar(GameObject basura){
         basura.SetActive(false);
-        sensor.SetTocandoBasura(false);
-        sensor.SetCercaDeBasura(false);
+        //sensor.SetTocandoBasura(false);
+        //sensor.SetCercaDeBasura(false);
     }
 
     public void CargarBateria(){
         bateria.Cargar();
     }
+
+    public void avanzarCasilla(){
+        int x = sensor.posicionx();
+        int z = sensor.posicionz();
+        while(z < 18){
+            this.Adelante();
+            x = sensor.posicionx();
+            z = sensor.posicionz();
+        }
+            this.Detener();
+    }
+
+    public void avanzar(float x , float z){
+        sensor.ActualizarPosicion();
+        Vector3 objetivo = new Vector3(x, sensor.posicion[1], z);
+        transform.position = Vector3.MoveTowards(sensor.posicion, objetivo, 30.0f * Time.deltaTime); 
+        sensor.ActualizarPosicion();
+    }
+
 }

@@ -19,8 +19,8 @@ public class Controlador : MonoBehaviour{
     void FixedUpdate(){
 
         // El agente no realiza ninguna acción si no tiene batería
-        if(sensor.Bateria() <= 0)
-            return;
+        //if(sensor.Bateria() <= 0)
+        //    return;
 
         // A continuación se muestran ejemplos de uso de actuadores y sensores
         // para ser utilizados de manera manual (por una persona):
@@ -47,7 +47,7 @@ public class Controlador : MonoBehaviour{
         if(Input.GetAxis("Horizontal") < 0)
             actuador.Izquierda();
 
-
+/*
         if(sensor.TocandoBasura()){
             Debug.Log("Tocando basura!");
             actuador.Limpiar(sensor.GetBasura());
@@ -61,12 +61,13 @@ public class Controlador : MonoBehaviour{
             Debug.Log("Cerca de una pared!");
 
         if(sensor.FrenteAPared())
-            Debug.Log("Frente a pared!");
+            Debug.Log("Frente a pared!");*/
 
 
         if(Input.GetKey(KeyCode.F))
             actuador.Detener();
+            /*
         if(Input.GetKey(KeyCode.G))
-            Debug.Log(sensor.Ubicacion());
+            Debug.Log(sensor.Ubicacion());*/
     }
 }
