@@ -15,6 +15,7 @@ public class ComportamientoAutomatico : MonoBehaviour {
 	public Vector3[] mesas = new Vector3[4];
 	public Vector3 zonaDeDesinfeccion;
 	int contador;
+	int recuerdo;
 
 	void Start(){
 		sensor = GetComponent<Sensores>();
@@ -33,6 +34,25 @@ public class ComportamientoAutomatico : MonoBehaviour {
 
 	void FixedUpdate () {
 
+		if(sensor.Bateria() <= 20.0f){
+			recuerdo=contador;
+			contador=10;
+		}
+
+		if(contador == 10){
+			float dist10 = Vector3.Distance(baseDeCarga, sensor.posicion) - sensor.posicion[1] + baseDeCarga[1];
+			Debug.Log("Distancia a base de carga: " + dist10);
+			if(dist10 != 0 && contador == 10){
+				actuador.avanzar(baseDeCarga[0], baseDeCarga[2]);
+				actuador.Detener();
+			}
+			if(dist10 == 0 && contador == 10 && sensor.Bateria()<= 120.0f){
+				actuador.Descender();
+				contador=recuerdo;
+				
+
+			}
+		}
 		if(sensor.CargaDeLibros() < 3 && contador < 4){
 
 	        float dist0 = Vector3.Distance(mesas[0], sensor.posicion) - sensor.posicion[1] + mesas[0][1];
@@ -92,9 +112,7 @@ public class ComportamientoAutomatico : MonoBehaviour {
 	        	 }
 	        	}
 	        	actuador.Flotar();
-	        	
 	        }
-
 		}else{
 			float distanciaZona = Vector3.Distance(zonaDeDesinfeccion, sensor.posicion) - sensor.posicion[1] + zonaDeDesinfeccion[1];
 			if(distanciaZona != 0){
@@ -106,7 +124,7 @@ public class ComportamientoAutomatico : MonoBehaviour {
 				if(contador == 4) contador = 0;
 				actuador.Flotar();
 			}
-			
+		
 		}
     }
 

@@ -35,7 +35,7 @@ public class Actuadores : MonoBehaviour
     }
 
     public void Descender(){
-        upForce = 10;
+        upForce = 0;
         rb.AddRelativeForce(Vector3.up * upForce);
     }
 
