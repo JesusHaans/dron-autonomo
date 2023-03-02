@@ -33,12 +33,12 @@ public class ComportamientoAutomatico : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-
+		
 		if(sensor.Bateria() <= 20.0f){
 			recuerdo=contador;
 			contador=10;
 		}
-
+		
 		if(contador == 10){
 			float dist10 = Vector3.Distance(baseDeCarga, sensor.posicion) - sensor.posicion[1] + baseDeCarga[1];
 			Debug.Log("Distancia a base de carga: " + dist10);
@@ -53,6 +53,7 @@ public class ComportamientoAutomatico : MonoBehaviour {
 
 			}
 		}
+		
 		if(sensor.CargaDeLibros() < 3 && contador < 4){
 
 	        float dist0 = Vector3.Distance(mesas[0], sensor.posicion) - sensor.posicion[1] + mesas[0][1];
