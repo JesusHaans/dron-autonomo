@@ -75,9 +75,10 @@ public class Sensores : MonoBehaviour{
         if(other.gameObject.CompareTag("Pared")){
             tocandoPared = true;
         }
+        /*
         if(other.gameObject.CompareTag("BaseDeCarga")){
             actuador.CargarBateria();
-        }
+        }*/
     }
 
     void OnCollisionExit(Collision other){
