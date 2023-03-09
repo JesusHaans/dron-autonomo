@@ -32,31 +32,22 @@ public class ComportamientoAutomatico : MonoBehaviour {
 		cicloTerminado = false;
 		cargar = false;
 		descendiendo = 0;
-		//uBase = GameObject.Find("Base").transform;
-		//baseCarga = this.transform;
+		//Libros.NuevoLibro(GameObject.Find("mesa"));
 	}
 
 	void FixedUpdate () {
-		/*
-		if(sensor.Bateria() <= 20.0f){
-			recuerdo=contador;
-			contador=10;
+		if(Input.GetKeyUp(KeyCode.Q)){
+			Libros.NuevoLibro(GameObject.Find("mesa"));
 		}
-		
-		if(contador == 10){
-			float dist10 = Vector3.Distance(baseDeCarga, sensor.posicion) - sensor.posicion[1] + baseDeCarga[1];
-			Debug.Log("Distancia a base de carga: " + dist10);
-			if(dist10 != 0 && contador == 10){
-				actuador.avanzar(baseDeCarga[0], baseDeCarga[2]);
-				actuador.Detener();
-			}
-			if(dist10 == 0 && contador == 10 && sensor.Bateria()<= 120.0f){
-				actuador.Descender();
-				contador=recuerdo;
-				
-
-			}
-		}*/
+		if(Input.GetKeyUp(KeyCode.W)){
+			Libros.NuevoLibro(GameObject.Find("mesa (1)"));
+		}
+		if(Input.GetKeyUp(KeyCode.A)){
+			Libros.NuevoLibro(GameObject.Find("mesa (2)"));
+		}
+		if(Input.GetKeyUp(KeyCode.S)){
+			Libros.NuevoLibro(GameObject.Find("mesa (3)"));
+		}
 		if(!cargar){
 			if(sensor.Bateria() <= 20.0f){
 				cargar = true;
@@ -93,7 +84,6 @@ public class ComportamientoAutomatico : MonoBehaviour {
 			        	}
 			        }
 			        float dist2 = Vector3.Distance(mesas[2], sensor.posicion) - sensor.posicion[1] + mesas[2][1];
-			        //print("Distance to other: " + dist);
 			        if(dist2 != 0 && contador == 2){
 			        	actuador.avanzar(mesas[2][0], mesas[2][2]);
 			        	actuador.Detener();
@@ -107,7 +97,6 @@ public class ComportamientoAutomatico : MonoBehaviour {
 			        	}
 			        }
 			        float dist3 = Vector3.Distance(mesas[3], sensor.posicion) - sensor.posicion[1] + mesas[3][1];
-			        //print("Distance to other: " + dist);
 			        if(dist3 != 0 && contador == 3){
 			        	actuador.avanzar(mesas[3][0], mesas[3][2]);
 			        	actuador.Detener();
