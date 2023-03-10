@@ -18,6 +18,10 @@ public class ComportamientoAutomatico : MonoBehaviour {
 	int recuerdo;
 	bool cargar;
 	int descendiendo;
+	int libros1;
+	int libros2;
+	int libros3;
+	int libros4;
 
 	void Start(){
 		sensor = GetComponent<Sensores>();
@@ -32,21 +36,46 @@ public class ComportamientoAutomatico : MonoBehaviour {
 		cicloTerminado = false;
 		cargar = false;
 		descendiendo = 0;
+		libros1 = 0;
+		libros2 = 0;
+		libros3 = 0;
+		libros4 = 0;
 		//Libros.NuevoLibro(GameObject.Find("mesa"));
 	}
 
 	void FixedUpdate () {
-		if(Input.GetKeyUp(KeyCode.Q)){
-			Libros.NuevoLibro(GameObject.Find("mesa"));
+		if(Input.GetKey(KeyCode.Q)){
+			if(libros1 == 0){
+				Libros.NuevoLibro(GameObject.Find("mesa"));
+			}
+			libros1++;
+			
+		}else{
+			libros1 = 0;
 		}
-		if(Input.GetKeyUp(KeyCode.W)){
-			Libros.NuevoLibro(GameObject.Find("mesa (1)"));
+		if(Input.GetKey(KeyCode.W)){
+			if(libros2 == 0){
+				Libros.NuevoLibro(GameObject.Find("mesa (1)"));
+			}
+			libros2++;
+		}else{
+			libros2 = 0;
 		}
-		if(Input.GetKeyUp(KeyCode.A)){
-			Libros.NuevoLibro(GameObject.Find("mesa (2)"));
+		if(Input.GetKey(KeyCode.A)){
+			if(libros3 == 0){
+				Libros.NuevoLibro(GameObject.Find("mesa (2)"));
+			}
+			libros3++;
+		}else{
+			libros3 = 0;
 		}
-		if(Input.GetKeyUp(KeyCode.S)){
-			Libros.NuevoLibro(GameObject.Find("mesa (3)"));
+		if(Input.GetKey(KeyCode.S)){
+			if(libros4 == 0){
+				Libros.NuevoLibro(GameObject.Find("mesa (3)"));
+			}
+			libros4++;
+		}else{
+			libros4 = 0;
 		}
 		if(!cargar){
 			if(sensor.Bateria() <= 20.0f){
