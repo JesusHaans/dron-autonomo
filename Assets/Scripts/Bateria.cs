@@ -17,11 +17,13 @@ public class Bateria : MonoBehaviour
 
     // ========================================
     // Métodos públicos que podrán ser utilizados por otros componentes (scripts):
+
+    /*Método para recagar la batería*/
     public void Cargar(){
         if(bateria < capacidadMaximaBateria)
             bateria += Time.deltaTime * velocidadDeCarga;
     }
-
+    /*Nos dice cuánta batería nos queda*/
     public float NivelDeBateria(){
         return bateria;
     }

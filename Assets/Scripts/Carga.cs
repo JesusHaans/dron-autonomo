@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Componente auxiliar que modela el comportamiento de una bateria interna
-// Dicha batería se descarga constantemente a menos que se utilize un método para recargar
+// Componente auxiliar que modela el comportamiento de la carga de libros del dron
+// El dron solo puede cargar 3 libros a la vez
 public class Carga : MonoBehaviour
 {
     public GameObject carga1; //Libro 1 en cargar
@@ -23,23 +23,26 @@ public class Carga : MonoBehaviour
 
     // ========================================
     // Métodos públicos que podrán ser utilizados por otros componentes (scripts):
+
+    /*Método que usamos para cargar un libro*/
     public void Cargar(){
-        if(carga == 0){
-           carga1.SetActive(true); 
-           carga++;
+        if(carga == 0){//Si no traemos ningún libro
+           carga1.SetActive(true); //Cargamos el primero
+           carga++;//Indicamos que ya llevamos un libro
         }else{
-        if(carga == 1){
-           carga2.SetActive(true); 
-           carga++;
+        if(carga == 1){//Si ya traemos un libro
+           carga2.SetActive(true); //Cargamos el segundo libro
+           carga++;//Indicamos que ya llevamos dos libros
         }else{
-        if(carga == 2){
-           carga3.SetActive(true); 
-           carga++;
+        if(carga == 2){//Si ya traemos dos libros
+           carga3.SetActive(true); //Cargamos el tercer libro
+           carga++;//Indicamos que ya llevamos tres libros
         }
         }
         }
     }
 
+    /*Método para descargar los libros que llevamos*/
     public void Descargar(){
         carga1.SetActive(false);
         carga2.SetActive(false);
@@ -47,6 +50,7 @@ public class Carga : MonoBehaviour
         carga = 0;
     }
 
+    /*Método para saaber cuántos libros lleva el dron*/
     public int NivelDeCarga(){
         return carga;
     }
